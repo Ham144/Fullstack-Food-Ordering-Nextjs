@@ -1,23 +1,28 @@
 "use client"
 import Image from 'next/image'
+import { redirect } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 
 
 const Registerpage = () => {
     const [email, setEmail] = useState("test1@example.com")
     const [password, setPassword] = useState("hammbebe")
+    const router = useRouter()
 
-
-    function handleSubmitRegister(ev) {
+    async function handleSubmitRegister(ev) {
         ev.preventDefault()
-        fetch("/api/register", {
+        const response = await fetch("/api/register", {
             method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
             body: JSON.stringify({
                 email, password
             })
-        }).then((response) => response.json())
-            .then((data) => console.log(data))
-            .catch((err) => console.log(err))
+        })
+        const data = await response.json()
+        if (data.ok) return router.push("/login")
     }
 
     return (
