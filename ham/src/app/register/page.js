@@ -1,5 +1,6 @@
 "use client"
 import Image from 'next/image'
+import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
@@ -39,15 +40,19 @@ const Registerpage = () => {
                     <input className='border-2 rounded-md w-[300px] ml-4 h-12 mb-3 bg-slate-200 px-4 text-black' type="text" placeholder='Password' value={password} onChange={(ev) => setPassword(ev.target.value)} />
                 </label>
                 <label className='font-bold' htmlFor="name">
-                    <input className='border-2 rounded-md w-[300px] ml-4 h-12 mb-3 bg-slate-200 px-4 text-black' type="text" />
+                    <input className='border-2 rounded-md w-[300px] ml-4 h-12 mb-3 bg-slate-200 px-4 text-black' placeholder='Phone' type="text" />
                 </label>
                 <button type='submit' className='bg-primer text-black w-full'>
                     Register
                 </button>
                 <p className='text-center text-slate-500'>-Or Login with-</p>
-                <button className='bg-sekunder flex justify-center items-center gap-x-5 w-full hover:bg-slate-200 hover:text-black mb-2'>
+                <button className='bg-sekunder flex justify-center items-center gap-x-5 w-full  hover:bg-slate-200 hover:text-black mb-2'>
                     <Image src={"/google.png"} alt='google' width={15} height={15} /> Google
                 </button>
+                <div>
+                    already have an acoount? {" "}
+                    <Link className='text-slate-600 ' href={"/login"} >Login page here &raquo;</Link>
+                </div>
             </form>
         </section>
     )
