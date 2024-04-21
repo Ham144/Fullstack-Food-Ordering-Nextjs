@@ -20,11 +20,11 @@ const handler = NextAuth({
                 const email = credentials?.email
                 const password = credentials?.password
 
-                console.log({ password })
-
                 mongoose.connect(process.env.MONGO_URL)
-                const user = User.findOne({ email })
+                const user = await User.findOne({ email })
+
                 if (user && user.password === password) {
+                    console.log(user)
                     return user
                 }
 

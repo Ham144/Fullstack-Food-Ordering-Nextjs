@@ -12,7 +12,8 @@ export default function Loginpage() {
     async function handleSubmitLogin(ev) {
         ev.preventDefault()
         try {
-            signIn('credentials', { email, password })
+            const response = await signIn('credentials', { email, password })
+            console.log(response)
         } catch (error) {
             console.log(error)
         }
