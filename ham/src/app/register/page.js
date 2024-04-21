@@ -7,8 +7,11 @@ import React, { useState } from 'react'
 
 
 const Registerpage = () => {
+    const [name, setName] = useState("")
     const [email, setEmail] = useState("test1@example.com")
     const [password, setPassword] = useState("hammbebe")
+    const [phone, setPhone] = useState("")
+
     const router = useRouter()
 
     async function handleSubmitRegister(ev) {
@@ -19,10 +22,9 @@ const Registerpage = () => {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                email, password
+                name, email, password, phone
             })
         })
-        const data = await response.json()
         if (response.ok) return router.push("/login")
     }
 
@@ -31,7 +33,7 @@ const Registerpage = () => {
             <form onSubmit={handleSubmitRegister} className='flex flex-col justify-center items-center mx-auto shadow-lg w-[400px] bg-sekunder rounded-md  mt-6 gap-y-2 '>
                 <h1 className='text-4xl mb-4 font-serif font-light '>Register</h1>
                 <label className='font-bold' htmlFor="name">
-                    <input className='border-2 rounded-md w-[300px] ml-4 h-12 mb-3 bg-slate-200 px-4 text-black' placeholder='Name' autoFocus type="text" />
+                    <input className='border-2 rounded-md w-[300px] ml-4 h-12 mb-3 bg-slate-200 px-4 text-black' placeholder='Name' value={name} onChange={ev => setName(ev.target.value)} autoFocus type="text" />
                 </label>
                 <label className='font-bold' htmlFor="Email">
                     <input className='border-2 rounded-md w-[300px] ml-4 h-12 mb-3 bg-slate-200 px-4 text-black' placeholder='Email' type="text" value={email} onChange={(ev) => setEmail(ev.target.value)} />
@@ -40,7 +42,7 @@ const Registerpage = () => {
                     <input className='border-2 rounded-md w-[300px] ml-4 h-12 mb-3 bg-slate-200 px-4 text-black' type="text" placeholder='Password' value={password} onChange={(ev) => setPassword(ev.target.value)} />
                 </label>
                 <label className='font-bold' htmlFor="name">
-                    <input className='border-2 rounded-md w-[300px] ml-4 h-12 mb-3 bg-slate-200 px-4 text-black' placeholder='Phone' type="text" />
+                    <input className='border-2 rounded-md w-[300px] ml-4 h-12 mb-3 bg-slate-200 px-4 text-black' placeholder='Phone' value={phone} onChange={ev => setPhone(ev.target.value)} type="text" />
                 </label>
                 <button type='submit' className='bg-primer text-black w-full'>
                     Register

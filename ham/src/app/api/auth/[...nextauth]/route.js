@@ -1,5 +1,5 @@
 import { User } from "@/app/models/user"
-import mongoose from "mongoose"
+import mongoose, { createConnection } from "mongoose"
 import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials";
 
@@ -17,7 +17,17 @@ const handler = NextAuth({
                 password: { label: "Password", type: "password" }
             },
             async authorize(credentials, req) {
-                console.log({ credentials });
+                const email = credentials?.email
+                const password = credentials?.password
+
+                console.log({ password })
+
+                mongoose.connect(process.env.MONGO_URL)
+                const user = User.findOne({ email })
+                if (user && user.password === password) {
+                    return user
+                }
+
                 return null
             }
         })
