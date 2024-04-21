@@ -2,10 +2,12 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import React from 'react'
 
 const Navbar = () => {
     const path = usePathname()
+    const router = useRouter()
 
     return (
         <nav className='flex justify-between items-center md:px-5 px-1 py-4 w-full  border-b-2 '>
@@ -21,8 +23,11 @@ const Navbar = () => {
                 <Link className={`font-semibold ${path === "/contact" ? "bg-sekunder max-md:border-none max-md:border-t-2" : ""} border-b-black hover:font-extrabold hover:border-b-2 duration-150`} href={"/contact"}>Contact</Link>
             </div >
             <div className='flex items-center gap-x-5'>
-                <button className='bg-sekunder' >Login</button>
-                <button className='bg-primer' >Register</button>
+                <button className='rounded-full  bg-yellow-400' onClick={() => router.push("/profile")}>
+                    <Image src="/profile.png" alt="profile" width={40} height={40} />
+                </button>
+                <button onClick={() => router.push("/login")} className='bg-sekunder' >Login</button>
+                <button onClick={() => router.push("/register")} className='bg-primer' >Register</button>
             </div>
         </nav>
     )
