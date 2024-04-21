@@ -12,4 +12,8 @@ const userSchema = new Schema({
     }
 }, { timestamps: true })
 
+userSchema.post('validate', (args) => {
+    console.log(args)
+})
+
 export const User = models?.User || model("User", userSchema) 
