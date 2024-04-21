@@ -3,6 +3,7 @@ import NextAuth from "next-auth"
 
 export const authOptions = {
     // Configure one or more authentication providers
+    secret: process.env.SECRET,
     providers: [
         CredentialsProvider({
             // The name to display on the sign in form (e.g. "Sign in with...")
@@ -18,6 +19,8 @@ export const authOptions = {
             },
             async authorize(credentials, req) {
                 // Add logic
+                console.log({ credentials })
+                return null
             }
         })
         // ...add more providers here

@@ -3,23 +3,15 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React, { useState } from 'react'
 
+
 const Loginpage = () => {
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
+
+    const [email, setEmail] = useState("test1@example.com")
+    const [password, setPassword] = useState("hammbebe")
 
     async function handleSubmitLogin(ev) {
         ev.preventDefault()
-        const response = await fetch("/api/login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                email, password
-            })
-        })
-        const data = await response.json()
-        console.log(data);
+        await signIn("Credentials")
     }
 
     return (
