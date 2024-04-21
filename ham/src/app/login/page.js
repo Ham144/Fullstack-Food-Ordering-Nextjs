@@ -1,17 +1,21 @@
 "use client"
+import { signIn } from 'next-auth/react'
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { useState } from 'react'
 
-
-const Loginpage = () => {
+export default function Loginpage() {
 
     const [email, setEmail] = useState("test1@example.com")
     const [password, setPassword] = useState("hammbebe")
 
     async function handleSubmitLogin(ev) {
         ev.preventDefault()
-        await signIn("Credentials")
+        try {
+            signIn('credentials', { email, password })
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     return (
@@ -39,5 +43,3 @@ const Loginpage = () => {
         </div>
     )
 }
-
-export default Loginpage

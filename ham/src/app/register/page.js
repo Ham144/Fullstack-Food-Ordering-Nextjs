@@ -23,7 +23,7 @@ const Registerpage = () => {
             })
         })
         const data = await response.json()
-        if (data.ok) return router.push("/login")
+        if (response.ok) return router.push("/login")
     }
 
     return (
