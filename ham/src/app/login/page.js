@@ -13,7 +13,7 @@ export default function Loginpage() {
         ev.preventDefault()
         try {
             const response = await signIn('credentials', { email, password })
-            console.log(response)
+            console.log(response, "response")
         } catch (error) {
             console.log(error)
         }
